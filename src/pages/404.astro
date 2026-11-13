@@ -1,0 +1,33 @@
+---
+import { DEFAULT_LOCALE, LOCALES, LOCALE_SETTINGS } from "../i18n/locales";
+import { HOME_PAGE_SLUG, localizedPath } from "../i18n/routes";
+import { uiStrings } from "../i18n/ui";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const defaultStrings = uiStrings(DEFAULT_LOCALE).notFound;
+const otherLocales = LOCALES.filter((locale) => locale !== DEFAULT_LOCALE);
+---
+
+<BaseLayout
+  title={defaultStrings.pageTitle}
+  description={defaultStrings.pageDescription}
+  locale={DEFAULT_LOCALE}
+  pageSlug={HOME_PAGE_SLUG}
+  isErrorPage
+>
+  <h1>{defaultStrings.title}</h1>
+  <p>{defaultStrings.text}</p>
+  <a href={localizedPath(HOME_PAGE_SLUG, DEFAULT_LOCALE)}>
+    {defaultStrings.homeButton}
+  </a>
+  {otherLocales.map((locale) => {
+    const strings = uiStrings(locale).notFound;
+    return (
+      <div lang={LOCALE_SETTINGS[locale].htmlLang}>
+        <h2>{strings.title}</h2>
+        <p>{strings.text}</p>
+        <a href={localizedPath(HOME_PAGE_SLUG, locale)}>{strings.homeButton}</a>
+      </div>
+    );
+  })}
+</BaseLayout>

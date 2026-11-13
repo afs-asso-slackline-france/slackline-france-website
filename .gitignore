@@ -1,0 +1,8 @@
+.DS_Store
+node_modules/
+dist/
+.astro/
+.env
+.idea/
+# Raw photo library: selected photos are resized into src/assets/images/.
+/assets/
