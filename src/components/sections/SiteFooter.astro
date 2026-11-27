@@ -1,0 +1,35 @@
+---
+import type { Locale } from "../../i18n/locales";
+import { buildFooterNavigation } from "../../i18n/navigation";
+import { uiStrings } from "../../i18n/ui";
+
+interface Props {
+  locale: Locale;
+  pageSlug: string;
+}
+
+const { locale, pageSlug } = Astro.props;
+const strings = uiStrings(locale).footer;
+const footerLinks = buildFooterNavigation(locale, pageSlug);
+---
+
+<footer class="on-blue rounded-t-lg bg-blue-deep py-12 text-paper">
+  <div class="mx-auto flex max-w-page flex-wrap justify-between gap-x-14 gap-y-5 px-gutter">
+    <p class="m-0 max-w-text">{strings.statement}</p>
+    <nav aria-label={strings.navigationLabel}>
+      <ul class="m-0 flex list-none flex-wrap gap-x-6 gap-y-2.5 p-0">
+        {footerLinks.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class="inline-block py-1 underline-offset-5 hover:underline"
+              aria-current={link.isCurrent ? "page" : undefined}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</footer>

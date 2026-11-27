@@ -9,7 +9,17 @@ import {
 
 const DEFAULT_HREFLANG = "x-default";
 
-export const HOME_PAGE_SLUG = "";
+export const PAGE_SLUGS = {
+  home: "",
+  community: "communaute",
+  spots: "spots",
+  resources: "ressources",
+  association: "association",
+  photoCredits: "credits-photo",
+  legalNotice: "mentions-legales",
+} as const;
+
+export type PageSlug = (typeof PAGE_SLUGS)[keyof typeof PAGE_SLUGS];
 
 export interface AlternateLink {
   hreflang: string;
@@ -29,6 +39,14 @@ export function localizedPath(pageSlug: string, locale: Locale): string {
   const segments = [localePrefix(locale), pageSlug].filter(Boolean);
   const isSiteRoot = segments.length === 0;
   return isSiteRoot ? "/" : `/${segments.join("/")}/`;
+}
+
+export function localizedAnchor(
+  pageSlug: string,
+  locale: Locale,
+  anchorId: string,
+): string {
+  return `${localizedPath(pageSlug, locale)}#${anchorId}`;
 }
 
 export function buildAlternateLinks(pageSlug: string): AlternateLink[] {

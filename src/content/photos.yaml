@@ -1,0 +1,239 @@
+highline-femme-brume:
+  image: ../assets/images/photos/highline-femme-brume.jpg
+  photographer: anthony-chenot
+  title:
+    fr: Highline dans la brume
+    en: Highline in the mist
+  alt:
+    fr: Une femme marche sur une highline, un bras levé, devant une aiguille rocheuse dans la brume
+    en: A woman walks a highline, one arm raised, in front of a rock spire in the mist
+
+initiation-enfant:
+  image: ../assets/images/photos/initiation-enfant.jpg
+  photographer: anthony-chenot
+  title:
+    fr: Initiation en montagne
+    en: First steps in the mountains
+  alt:
+    fr: Un homme tient la main d’une enfant qui avance sur une slackline d’initiation, face aux montagnes
+    en: A man holds the hand of a girl walking on a beginner slackline, facing the mountains
+
+slackline-lac-bras-ouverts:
+  image: ../assets/images/photos/slackline-lac-bras-ouverts.jpg
+  photographer: anthony-chenot
+  title:
+    fr: Slackline au bord du lac, bras ouverts
+    en: Slackline by the lake, arms open
+  alt:
+    fr: Une femme en équilibre sur une slackline dans un parc au bord d’un lac, les bras ouverts, face aux montagnes
+    en: A woman balances on a slackline in a lakeside park, arms open, facing the mountains
+
+waterline-lac:
+  image: ../assets/images/photos/waterline-lac.jpg
+  photographer: anthony-chenot
+  title:
+    fr: Waterline sur le lac
+    en: Waterline on the lake
+  alt:
+    fr: Une femme traverse une waterline au ras d’un lac turquoise, vue entre les branches d’un pin
+    en: A woman crosses a waterline just above a turquoise lake, seen through the branches of a pine
+
+speedline-festival:
+  image: ../assets/images/photos/speedline-festival.jpg
+  photographer: anthony-chenot
+  title:
+    fr: Speedline en festival
+    en: Speedline at a festival
+  alt:
+    fr: Une jeune femme court sur une sangle posée sur le sable, devant le public d’un festival assis dans l’herbe
+    en: A young woman runs along a line set over sand, in front of a festival crowd sitting in the grass
+
+festival-parc:
+  image: ../assets/images/photos/festival-parc.jpg
+  photographer: anthony-chenot
+  title:
+    fr: Festival sous les arbres
+    en: Festival under the trees
+  alt:
+    fr: Un homme aux cheveux longs, le bras levé, avance sur une slackline devant le public d’un festival, sous les arbres d’un parc
+    en: A long haired man, one arm raised, walks a slackline in front of a festival crowd, under the trees of a park
+
+highline-urbaine:
+  image: ../assets/images/photos/highline-urbaine.jpg
+  photographer: anthony-chenot
+  title:
+    fr: Highline urbaine
+    en: Urban highline
+  alt:
+    fr: Une highline tendue au-dessus de la foule d’un festival, entre les arbres et les toits d’une ville
+    en: A highline rigged above a festival crowd, between the trees and the roofs of a town
+
+groupe-sangle:
+  image: ../assets/images/photos/groupe-sangle.jpg
+  photographer: anthony-chenot
+  title:
+    fr: À cinq sur la sangle
+    en: Five on one line
+  alt:
+    fr: Cinq personnes s’amusent à tenir en équilibre ensemble sur une sangle posée au ras du sol, pendant un festival
+    en: Five people try to balance together on a line set just above the ground, during a festival
+
+falaise-groupe:
+  image: ../assets/images/photos/falaise-groupe.jpg
+  photographer: anthony-chenot
+  title:
+    fr: Au bord de la falaise
+    en: At the edge of the cliff
+  alt:
+    fr: Un groupe assis au bord d’une falaise regarde une personne s’élancer sur une highline, la ville en contrebas
+    en: A group sitting at the edge of a cliff watches someone set off on a highline, the town below
+
+pieds-sangle:
+  image: ../assets/images/photos/pieds-sangle.jpg
+  photographer: anthony-chenot
+  title:
+    fr: Pieds nus sur la sangle
+    en: Barefoot on the line
+  alt:
+    fr: Deux pieds nus en équilibre sur une sangle tendue juste au-dessus de l’herbe d’un parc
+    en: Two bare feet balancing on a line rigged just above the grass of a park
+
+slackline-parc-lac:
+  image: ../assets/images/photos/slackline-parc-lac.jpg
+  photographer: anthony-chenot
+  title:
+    fr: Slackline au bord du lac
+    en: Slackline by the lake
+  alt:
+    fr: Une femme en équilibre sur une slackline tendue près du sol, dans un parc au bord d’un lac
+    en: A woman balances on a slackline close to the ground, in a lakeside park
+
+highline-lac-montagne:
+  image: ../assets/images/photos/highline-lac-montagne.jpg
+  photographer: anthony-chenot
+  title:
+    fr: Highline au-dessus du lac
+    en: Highline above the lake
+  alt:
+    fr: Une personne sur une highline très au-dessus d’un lac de montagne turquoise, entouré d’alpages
+    en: A person on a highline high above a turquoise mountain lake surrounded by pastures
+
+highline-crete-coucher-soleil:
+  image: ../assets/images/photos/highline-crete-coucher-soleil.jpg
+  photographer: anthony-chenot
+  title:
+    fr: Highline au coucher du soleil
+    en: Highline at sunset
+  alt:
+    fr: Une silhouette traverse une highline au coucher du soleil, au-dessus d’une crête rocheuse et d’une mer de montagnes
+    en: A silhouette crosses a highline at sunset, above a rocky ridge and a sea of mountains
+
+highlines-paralleles-mont-blanc:
+  image: ../assets/images/photos/highlines-paralleles-mont-blanc.jpg
+  photographer: anthony-chenot
+  title:
+    fr: Deux highlines face au Mont-Blanc
+    en: Two highlines facing Mont Blanc
+  alt:
+    fr: Deux personnes marchent sur des highlines parallèles le long d’une falaise, face au massif du Mont-Blanc
+    en: Two people walk parallel highlines along a cliff, facing the Mont Blanc massif
+
+highline-panorama-bleu:
+  image: ../assets/images/photos/highline-panorama-bleu.jpg
+  photographer: anthony-chenot
+  title:
+    fr: Highline dans le bleu
+    en: Highline in the blue
+  alt:
+    fr: Une silhouette seule sur une très longue highline, devant des plans successifs de montagnes bleues dans la brume
+    en: A lone silhouette on a very long highline, in front of layers of blue mountains in the haze
+
+highline-freestyle-saut:
+  image: ../assets/images/photos/highline-freestyle-saut.jpg
+  photographer: charles-rippon
+  title:
+    fr: Saut en highline freestyle
+    en: Highline freestyle jump
+  alt:
+    fr: Un homme en plein saut au-dessus d’une sangle de highline freestyle, le bras levé, sous un ciel bleu nuageux
+    en: A man mid jump above a freestyle highline, one arm raised, under a cloudy blue sky
+
+trickline-saut:
+  image: ../assets/images/photos/trickline-saut.jpg
+  photographer: charles-rippon
+  title:
+    fr: Saut sur la sangle
+    en: Jump on the line
+  alt:
+    fr: Un homme saute haut au-dessus d’une sangle tendue, sous un ciel bleu
+    en: A man jumps high above a tight line, under a blue sky
+
+highline-tour-rocheuse:
+  image: ../assets/images/photos/highline-tour-rocheuse.jpg
+  photographer: slackicimes
+  title:
+    fr: Highline depuis la tour rocheuse
+    en: Highline from the rock tower
+  alt:
+    fr: Un homme marche sur une highline tendue depuis le sommet d’une tour rocheuse, au soleil couchant, devant les montagnes enneigées
+    en: A man walks a highline rigged from the top of a rock tower, at sunset, in front of snowy mountains
+
+highline-freestyle-coucher-soleil:
+  image: ../assets/images/photos/highline-freestyle-coucher-soleil.jpg
+  photographer: slackicimes
+  title:
+    fr: Highline freestyle au coucher du soleil
+    en: Highline freestyle at sunset
+  alt:
+    fr: Une personne fait une figure tête en bas sur une highline au coucher du soleil, au-dessus d’une vallée de montagne
+    en: A person hangs upside down in a trick on a highline at sunset, above a mountain valley
+
+slackline-rue:
+  image: ../assets/images/photos/slackline-rue.jpg
+  photographer: mathieu-pertus
+  title:
+    fr: La Grande Braderie d’Ardèche Slackline
+    en: Ardèche Slackline at the Grande Braderie
+  alt:
+    fr: Des slacklineurs enchaînent les figures dans une rue de centre-ville, devant les passants, pendant un festival
+    en: Slackliners perform tricks on a downtown street, in front of passers-by, during a festival
+
+ancrage-arbre:
+  image: ../assets/images/photos/ancrage-arbre.jpg
+  photographer: mathieu-pertus
+  title:
+    fr: Ancrage sur un arbre
+    en: Tree anchor
+  alt:
+    fr: Au premier plan, l’ancrage d’une slackline autour d’un tronc protégé ; au loin, une femme en équilibre sur la sangle dans un pré
+    en: In the foreground, a slackline anchored around a protected tree trunk; in the distance, a woman balancing on the line in a meadow
+
+waterline-pont:
+  image: ../assets/images/photos/waterline-pont.jpg
+  photographer: nicolas-vacher
+  title:
+    fr: Waterline sous le pont
+    en: Waterline under the bridge
+  alt:
+    fr: Une personne sur une waterline au-dessus d’une rivière calme, sous l’arche d’un pont de pierre qui se reflète dans l’eau
+    en: A person on a waterline above a calm river, under the arch of a stone bridge reflected in the water
+
+initiation-terrain:
+  image: ../assets/images/photos/initiation-terrain.jpg
+  photographer: ardeche-slackline
+  title:
+    fr: Initiation slackline
+    en: Slackline introduction
+  alt:
+    fr: Deux enfants s’essaient à des slacklines d’initiation posées au ras de l’herbe, sur un terrain de sport
+    en: Two children try beginner slacklines set just above the grass of a sports field
+
+installation-neige:
+  image: ../assets/images/photos/installation-neige.jpg
+  photographer: marmotte
+  title:
+    fr: Installation dans la neige
+    en: Rigging in the snow
+  alt:
+    fr: Une femme coiffée d’un chapeau installe l’ancrage d’une highline dans la neige
+    en: A woman in a hat sets up a highline anchor in the snow

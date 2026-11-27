@@ -1,0 +1,47 @@
+---
+import HeadStrap from "../ui/HeadStrap.astro";
+
+type HeadingSize = "page" | "hero";
+
+interface Props {
+  heading: string;
+  lede?: string;
+  headingSize?: HeadingSize;
+}
+
+const HEADING_SIZE_CLASSES: Record<HeadingSize, string> = {
+  page: "text-page-title",
+  hero: "text-hero",
+};
+
+const { heading, lede, headingSize = "page" } = Astro.props;
+const hasMedia = Astro.slots.has("media");
+---
+
+<section data-strap-area>
+  <div class="mx-auto grid max-w-page items-end gap-8 px-gutter pt-5 md:grid-cols-12 md:gap-12 md:pt-11">
+    <div
+      class:list={[
+        "flex min-w-0 flex-col items-start gap-5 md:pb-7",
+        hasMedia ? "md:col-span-5" : "md:col-span-12",
+      ]}
+    >
+      <h1
+        class:list={[
+          "m-0 font-display font-bold text-balance text-blue",
+          HEADING_SIZE_CLASSES[headingSize],
+        ]}
+      >
+        {heading}
+      </h1>
+      {lede && <p class="m-0 max-w-text text-lede">{lede}</p>}
+      <slot />
+    </div>
+    {hasMedia && (
+      <div class="min-w-0 md:col-span-7">
+        <slot name="media" />
+      </div>
+    )}
+  </div>
+  <HeadStrap />
+</section>

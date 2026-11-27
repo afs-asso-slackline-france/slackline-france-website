@@ -22,4 +22,6 @@ npm run dev
 
 Work happens on feature branches created from `dev`, merged back into `dev` through pull requests. `main` is the release branch: every push to `main` is built and deployed by `.github/workflows/deploy.yml` (pull requests and `dev` are built but not deployed).
 
-French pages live at the root and English pages under `/en/`. Page copy lives in `src/content/`, short UI strings in `src/i18n/ui.ts`. The raw photo library sits in `assets/` and is not committed; photos used on the site are resized into `src/assets/images/`.
+French pages live at the root and English pages under `/en/`. Page copy lives in `src/content/`, short UI strings in `src/i18n/ui.ts`. The raw photo library sits in `assets/` and is not committed; photos used on the site are resized into `src/assets/images/photos/` and registered in `src/content/photos.yaml` with their photographer (`src/content/photographers.yaml`), which feeds the photo credits page.
+
+Design tokens (colors, type, spacing, radii, breakpoints) are defined once in `src/styles/global.css`. Shared building blocks live in `src/components/ui/` (`Button`, `TextLink`, `Tile`, `SpecRow`, `HeadStrap`) and page sections in `src/components/sections/` (`SiteHeader`, `SiteFooter`, `PageHead`, `PhotographerCredits`).

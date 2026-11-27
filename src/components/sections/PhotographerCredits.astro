@@ -1,0 +1,66 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import type { LocalizedPhoto } from "../../i18n/collections";
+import type { Locale } from "../../i18n/locales";
+import { countWithNoun } from "../../i18n/plural";
+import { uiStrings } from "../../i18n/ui";
+import { IMAGE_PRESETS } from "../../lib/image-presets";
+
+interface Props {
+  photographer: CollectionEntry<"photographers">;
+  photos: LocalizedPhoto[];
+  locale: Locale;
+}
+
+const { photographer, photos, locale } = Astro.props;
+const strings = uiStrings(locale).photoCredits;
+const photoCount = countWithNoun(photos.length, locale, strings.photoCount);
+const thumbnail = IMAGE_PRESETS.creditsThumbnail;
+---
+
+<article
+  id={photographer.id}
+  class="grid gap-x-14 gap-y-6 border-t-2 border-blue py-8 md:grid-cols-4 md:py-14"
+>
+  <div class="flex min-w-0 flex-col items-start gap-3">
+    <h2 class="m-0 font-display text-feature font-bold text-balance text-blue">
+      {photographer.data.name}
+    </h2>
+    <p class="m-0 text-small text-mute">
+      {photoCount}.
+      {photographer.data.isMemberAssociation && strings.memberAssociation}
+    </p>
+    {photographer.data.links.length > 0 && (
+      <ul class="m-0 flex list-none flex-wrap gap-2 p-0">
+        {photographer.data.links.map((link) => (
+          <li>
+            <a
+              href={link.url}
+              class="inline-block rounded-pill border-2 border-blue px-4.5 py-2.5 text-small font-semibold text-blue no-underline hover:bg-blue hover:text-white"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+  <ul class="m-0 grid list-none gap-4 p-0 sm:grid-cols-2 md:col-span-3 lg:grid-cols-3">
+    {photos.map((photo) => (
+      <li>
+        <figure class="m-0">
+          <Image
+            src={photo.image}
+            alt={photo.alt}
+            width={thumbnail.width}
+            widths={thumbnail.widths}
+            sizes={thumbnail.sizes}
+            class="block aspect-4/3 w-full rounded-md bg-band object-cover"
+          />
+          <figcaption class="mt-2 text-small">{photo.title}</figcaption>
+        </figure>
+      </li>
+    ))}
+  </ul>
+</article>

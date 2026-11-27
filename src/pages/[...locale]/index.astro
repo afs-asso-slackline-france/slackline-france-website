@@ -1,7 +1,8 @@
 ---
 import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+import PageHead from "../../components/sections/PageHead.astro";
 import { getPageEntry } from "../../i18n/collections";
-import { HOME_PAGE_SLUG, buildLocaleStaticPaths } from "../../i18n/routes";
+import { PAGE_SLUGS, buildLocaleStaticPaths } from "../../i18n/routes";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 export const getStaticPaths = (() =>
@@ -10,14 +11,19 @@ export const getStaticPaths = (() =>
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { locale } = Astro.props;
-const page = await getPageEntry(HOME_PAGE_SLUG, locale);
+const pageSlug = PAGE_SLUGS.home;
+const page = await getPageEntry(pageSlug, locale);
 ---
 
 <BaseLayout
   title={page.data.title}
   description={page.data.description}
   locale={locale}
-  pageSlug={HOME_PAGE_SLUG}
+  pageSlug={pageSlug}
 >
-  <h1>{page.data.heading}</h1>
+  <PageHead
+    heading={page.data.heading}
+    lede={page.data.lede}
+    headingSize="hero"
+  />
 </BaseLayout>

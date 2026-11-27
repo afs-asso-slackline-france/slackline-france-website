@@ -1,0 +1,62 @@
+---
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+import PageHead from "../../components/sections/PageHead.astro";
+import PhotographerCredits from "../../components/sections/PhotographerCredits.astro";
+import TextLink from "../../components/ui/TextLink.astro";
+import Tile from "../../components/ui/Tile.astro";
+import {
+  getAllPhotos,
+  getPageEntry,
+  getPhotographer,
+} from "../../i18n/collections";
+import { PAGE_SLUGS, buildLocaleStaticPaths } from "../../i18n/routes";
+import { uiStrings } from "../../i18n/ui";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { groupPhotosByPhotographer } from "../../lib/photo-credits";
+import { CONTACT_EMAIL } from "../../lib/site";
+
+export const getStaticPaths = (() =>
+  buildLocaleStaticPaths()) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { locale } = Astro.props;
+const pageSlug = PAGE_SLUGS.photoCredits;
+const page = await getPageEntry(pageSlug, locale);
+const strings = uiStrings(locale).photoCredits;
+const creditGroups = await Promise.all(
+  groupPhotosByPhotographer(await getAllPhotos(locale)).map(async (group) => ({
+    photographer: await getPhotographer(group.photographerId),
+    photos: group.photos,
+  })),
+);
+---
+
+<BaseLayout
+  title={page.data.title}
+  description={page.data.description}
+  locale={locale}
+  pageSlug={pageSlug}
+>
+  <PageHead heading={page.data.heading} lede={page.data.lede} />
+  <section class="mx-auto max-w-page px-gutter pt-section-tight pb-section">
+    {creditGroups.map((group) => (
+      <PhotographerCredits
+        photographer={group.photographer}
+        photos={group.photos}
+        locale={locale}
+      />
+    ))}
+    <Tile class="mt-6 md:mt-10">
+      <h2 class="m-0 font-display text-item-title font-bold text-blue">
+        {strings.removalTitle}
+      </h2>
+      <p class="m-0 max-w-text">{strings.removalText}</p>
+      <div class="mt-auto pt-2">
+        <TextLink href={`mailto:${CONTACT_EMAIL}`}>
+          {strings.removalLink}
+        </TextLink>
+      </div>
+    </Tile>
+  </section>
+</BaseLayout>
