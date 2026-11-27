@@ -1,16 +1,25 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 
+type LinkTone = "default" | "onBlue";
+
 interface Props extends HTMLAttributes<"a"> {
   href: string;
+  tone?: LinkTone;
 }
 
-const { class: extraClasses, ...attributes } = Astro.props;
+const TONE_CLASSES: Record<LinkTone, string> = {
+  default: "text-blue",
+  onBlue: "text-paper",
+};
+
+const { tone = "default", class: extraClasses, ...attributes } = Astro.props;
 ---
 
 <a
   class:list={[
-    "inline-block py-2 font-semibold text-blue underline decoration-raspberry decoration-2 underline-offset-5 hover:decoration-4",
+    "inline-block py-2 font-semibold underline decoration-raspberry decoration-2 underline-offset-5 hover:decoration-4",
+    TONE_CLASSES[tone],
     extraClasses,
   ]}
   {...attributes}

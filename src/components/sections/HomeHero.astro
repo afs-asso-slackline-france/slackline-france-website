@@ -1,0 +1,43 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getCreditedPhoto } from "../../i18n/collections";
+import type { Locale } from "../../i18n/locales";
+import Shot from "../ui/Shot.astro";
+import PageHead from "./PageHead.astro";
+
+interface Props {
+  heading: string;
+  lede?: string;
+  hero: CollectionEntry<"home">["data"]["hero"];
+  locale: Locale;
+}
+
+const { heading, lede, hero, locale } = Astro.props;
+const mainPhoto = await getCreditedPhoto(hero.mainPhoto.id, locale);
+const sidePhotos = await Promise.all(
+  hero.sidePhotos.map((photo) => getCreditedPhoto(photo.id, locale)),
+);
+---
+
+<PageHead heading={heading} lede={lede} headingSize="hero">
+  <div slot="media" class="grid min-w-0 gap-3 sm:grid-cols-3">
+    <Shot
+      photo={mainPhoto}
+      locale={locale}
+      preset="heroMain"
+      class="aspect-5/6 sm:col-span-2"
+      isAboveTheFold
+    />
+    <div class="grid grid-cols-2 gap-3 sm:grid-cols-1 sm:grid-rows-2">
+      {sidePhotos.map((photo) => (
+        <Shot
+          photo={photo}
+          locale={locale}
+          preset="heroSide"
+          class="aspect-4/3 sm:aspect-auto"
+          isAboveTheFold
+        />
+      ))}
+    </div>
+  </div>
+</PageHead>

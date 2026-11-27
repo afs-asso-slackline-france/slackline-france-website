@@ -1,0 +1,69 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getCreditedPhoto, getUpcomingEvents } from "../../i18n/collections";
+import { resolveLink } from "../../i18n/links";
+import { LOCALE_SETTINGS, type Locale } from "../../i18n/locales";
+import { HOME_ANCHORS } from "../../i18n/navigation";
+import { formatDateRange } from "../../lib/dates";
+import SectionHeading from "../ui/SectionHeading.astro";
+import Shot from "../ui/Shot.astro";
+import TextLink from "../ui/TextLink.astro";
+
+interface Props {
+  agenda: CollectionEntry<"home">["data"]["agenda"];
+  locale: Locale;
+}
+
+const SHOWN_EVENT_COUNT = 8;
+
+const { agenda, locale } = Astro.props;
+const language = LOCALE_SETTINGS[locale].htmlLang;
+const photo = await getCreditedPhoto(agenda.photo.id, locale);
+const events = await getUpcomingEvents(SHOWN_EVENT_COUNT);
+---
+
+<section class="pb-section">
+  <div class="mx-auto mb-6 max-w-page px-gutter md:mb-10">
+    <SectionHeading id={HOME_ANCHORS.agenda}>{agenda.heading}</SectionHeading>
+  </div>
+  <div class="mx-auto grid max-w-page items-start gap-10 px-gutter md:grid-cols-3 md:gap-14">
+    <Shot
+      photo={photo}
+      locale={locale}
+      preset="column"
+      class="aspect-3/4 max-md:hidden"
+    />
+    <div class="min-w-0 md:col-span-2">
+      {events.length === 0 ? (
+        <p class="m-0 border-t-2 border-blue pt-4 font-medium">
+          {agenda.noEvents}
+        </p>
+      ) : (
+        <ul class="m-0 list-none border-t-2 border-blue p-0">
+          {events.map((event) => (
+            <li class="flex flex-wrap items-baseline gap-x-6 gap-y-1 border-b border-rule py-4.5">
+              <time
+                datetime={event.startDate}
+                class="w-44 flex-none font-bold text-raspberry-deep"
+              >
+                {formatDateRange(event.startDate, event.endDate, language)}
+              </time>
+              <div class="min-w-0 grow basis-80">
+                <h3 class="m-0 font-display text-item-title font-bold text-blue">
+                  {event.summary}
+                </h3>
+                {event.location && (
+                  <p class="m-0 mt-1 text-small text-mute">{event.location}</p>
+                )}
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+      <p class="mt-4 mb-0 text-small text-mute">{agenda.source}</p>
+      <TextLink href={resolveLink(agenda.calendarLink, locale)}>
+        {agenda.calendarLink.label}
+      </TextLink>
+    </div>
+  </div>
+</section>

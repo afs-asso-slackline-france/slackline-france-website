@@ -1,0 +1,58 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { resolveLink } from "../../i18n/links";
+import type { Locale } from "../../i18n/locales";
+
+interface Props {
+  audiences: CollectionEntry<"home">["data"]["audiences"];
+  locale: Locale;
+}
+
+const { audiences, locale } = Astro.props;
+---
+
+<section class="mx-auto max-w-page px-gutter pt-section-tight pb-section">
+  <ul class="m-0 grid list-none gap-6 p-0 md:grid-cols-3 md:gap-8">
+    {audiences.map((audience) => (
+      <li class="group pointer-fine:h-80 pointer-fine:perspective-distant">
+        <div class="grid gap-2 transition-transform duration-700 ease-out motion-reduce:transition-none pointer-fine:relative pointer-fine:size-full pointer-fine:transform-3d pointer-fine:group-focus-within:rotate-y-180 pointer-fine:group-hover:rotate-y-180">
+          <div class="flex min-h-40 flex-col items-center justify-center rounded-md bg-band p-9 text-center pointer-fine:absolute pointer-fine:inset-0 pointer-fine:backface-hidden">
+            <h2 class="m-0 font-display text-section-title font-bold text-balance text-blue">
+              {audience.title}
+            </h2>
+            <span class="mt-5 block h-1.5 w-12 rounded-pill bg-raspberry" />
+          </div>
+          <div class="on-blue flex flex-col justify-center gap-3 rounded-md bg-blue p-9 text-white pointer-fine:absolute pointer-fine:inset-0 pointer-fine:rotate-y-180 pointer-fine:backface-hidden">
+            <p class="m-0 text-small" aria-hidden="true">
+              {audience.title}
+            </p>
+            <ul class="m-0 list-none divide-y divide-white/20 p-0">
+              {audience.links.map((link) => (
+                <li>
+                  <a
+                    href={resolveLink(link, locale)}
+                    class="group/link flex min-h-13 items-center justify-between gap-4 text-lede font-semibold text-white no-underline decoration-raspberry decoration-2 underline-offset-5 hover:underline"
+                  >
+                    {link.label}
+                    <svg
+                      class="size-5.5 flex-none transition-transform group-hover/link:translate-x-1 motion-reduce:transition-none"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </li>
+    ))}
+  </ul>
+</section>

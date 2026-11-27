@@ -1,0 +1,96 @@
+ardeche-slackline:
+  name: Ardèche Slackline
+  city: Les Vans
+  email: slackardeche@gmail.com
+  place: les-vans
+  coordinates: [4.13, 44.4]
+association-bfk:
+  name: Association BFK
+  city: Briançon
+  email: voyagesdanslevide@outlook.fr
+  place: briancon
+  coordinates: [6.6, 44.9]
+cest-slack-er-bon:
+  name: C’est Slack…Er Bon
+  city: Grenoble
+  email: cestslackerbon@gmail.com
+  place: grenoble
+  coordinates: [5.72, 45.19]
+ca-marche:
+  name: Ca Marche
+  city: Rhône-Alpes, Occitanie
+  email: asso.camarche@gmail.com
+  place: ca-marche
+  coordinates: [3.3, 43.95]
+caslackhouledouce:
+  name: CaSlackHouleDouce
+  city: Marseille
+  email: houledouce@gmail.com
+  place: marseille
+  coordinates: [5.42, 43.45]
+ekilibre-lyon:
+  name: Ekilibre Lyon
+  city: Lyon
+  email: ekilibrelyon@gmail.com
+  place: lyon
+  coordinates: [4.84, 45.76]
+equilibre-paris:
+  name: Équilibre Paris
+  city: Paris
+  email: equilibreidf@gmail.com
+  place: paris
+  coordinates: [2.35, 48.86]
+feelethik:
+  name: Feelethik
+  city: Bordeaux
+  email: feelethik@gmail.com
+  place: bordeaux
+  coordinates: [-0.5, 44.84]
+freedome-line:
+  name: Freedôme Line
+  city: Clermont-Ferrand
+  email: freedomeline@gmail.com
+  place: clermont-ferrand
+  coordinates: [3.09, 45.78]
+les-sangles-de-l-ouest:
+  name: Les Sanglés de l’Ouest
+  city: Nantes
+  email: contact.lsdo@gmail.com
+  place: nantes
+  coordinates: [-1.5, 47.22]
+parislack:
+  name: Parislack
+  city: Paris
+  email: parislack.asso@gmail.com
+  place: paris
+  coordinates: [2.35, 48.86]
+s-lac-k-est-beau:
+  name: S’Lac’k est beau
+  city: Annecy
+  email: slackline@cafannecy.fr
+  place: annecy
+  coordinates: [6.13, 45.9]
+sky-expeditions:
+  name: Sky Expeditions
+  city: Maurienne
+  email: skyexpe@gmail.com
+  place: maurienne
+  coordinates: [6.35, 45.28]
+slackicimes:
+  name: Slack’icîmes
+  city: Bourg-Saint-Maurice
+  email: slackicimes@gmail.com
+  place: bourg-saint-maurice
+  coordinates: [6.72, 45.62]
+slacklille:
+  name: Slacklille
+  city: Lille
+  email: slacklille@gmail.com
+  place: lille
+  coordinates: [3.0, 50.52]
+slackline-pays-basque:
+  name: Slackline Pays Basque
+  city: Biarritz
+  email: slacklinepaysbasque@gmail.com
+  place: biarritz
+  coordinates: [-1.3, 43.45]

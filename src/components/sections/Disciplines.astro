@@ -1,0 +1,93 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import { getCreditedPhoto } from "../../i18n/collections";
+import type { Locale } from "../../i18n/locales";
+import { IMAGE_PRESETS } from "../../lib/image-presets";
+import { STRAP_GEOMETRIES, sagPath, strapViewBox } from "../../lib/strap";
+import Credit from "../ui/Credit.astro";
+import SectionHeading from "../ui/SectionHeading.astro";
+import Tile from "../ui/Tile.astro";
+
+interface Props {
+  disciplines: CollectionEntry<"home">["data"]["disciplines"];
+  locale: Locale;
+}
+
+const CENTERED_SAG = 0.5;
+
+const { disciplines, locale } = Astro.props;
+const withPhotos = (entries: typeof disciplines.others) =>
+  Promise.all(
+    entries.map(async (entry) => ({
+      ...entry,
+      creditedPhoto: await getCreditedPhoto(entry.photo.id, locale),
+    })),
+  );
+const featured = await withPhotos(disciplines.featured);
+const others = await withPhotos(disciplines.others);
+const cardRow = STRAP_GEOMETRIES.cardRow;
+const cardRowPath = sagPath(CENTERED_SAG, cardRow);
+const cardImage = IMAGE_PRESETS.card;
+---
+
+<section class="relative">
+  <div class="mx-auto mb-6 max-w-page px-gutter md:mb-10">
+    <SectionHeading>{disciplines.heading}</SectionHeading>
+  </div>
+  <svg
+    class="absolute inset-x-0 top-card-line h-37.5 w-full overflow-visible max-sm:hidden"
+    viewBox={strapViewBox(cardRow)}
+    preserveAspectRatio="none"
+    aria-hidden="true"
+  >
+    <path class="strap-band" d={cardRowPath}></path>
+    <path class="strap-seam" d={cardRowPath}></path>
+  </svg>
+  <div class="relative mx-auto max-w-page px-gutter">
+    <ul class="m-0 grid list-none gap-6 p-0 sm:grid-cols-3 sm:gap-12">
+      {featured.map((discipline) => (
+        <li class="flex min-w-0 flex-col overflow-hidden rounded-lg bg-band sm:nth-2:translate-y-sag">
+          <div class="relative">
+            <Image
+              src={discipline.creditedPhoto.image}
+              alt={discipline.creditedPhoto.alt}
+              width={cardImage.width}
+              widths={cardImage.widths}
+              sizes={cardImage.sizes}
+              class="block aspect-4/5 w-full object-cover"
+            />
+            <Credit photo={discipline.creditedPhoto} locale={locale} />
+          </div>
+          <div class="flex flex-col gap-1.5 px-6 pt-5 pb-6.5">
+            <h3 class="m-0 font-display text-feature font-bold text-blue">
+              {discipline.name}
+            </h3>
+            <p class="m-0">{discipline.text}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+    <ul class="m-0 mt-10 grid list-none gap-4 p-0 sm:grid-cols-3 md:mt-16">
+      {others.map((discipline) => (
+        <Tile as="li">
+          <div class="relative mb-2 overflow-hidden rounded-sm bg-rule">
+            <Image
+              src={discipline.creditedPhoto.image}
+              alt={discipline.creditedPhoto.alt}
+              width={cardImage.width}
+              widths={cardImage.widths}
+              sizes={cardImage.sizes}
+              class="block aspect-4/3 w-full object-cover"
+            />
+            <Credit photo={discipline.creditedPhoto} locale={locale} />
+          </div>
+          <h3 class="m-0 font-display text-item-title font-bold text-blue">
+            {discipline.name}
+          </h3>
+          <p class="m-0">{discipline.text}</p>
+        </Tile>
+      ))}
+    </ul>
+  </div>
+</section>

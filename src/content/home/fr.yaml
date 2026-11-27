@@ -1,0 +1,82 @@
+hero:
+  mainPhoto: highline-femme-brume
+  sidePhotos: [highline-freestyle-saut, initiation-enfant]
+
+audiences:
+  - title: Pratiquants
+    links:
+      - { label: Trouver une association, page: home, anchor: associations }
+      - { label: Trouver un spot, page: spots }
+      - { label: Débuter, page: community, anchor: debuter }
+  - title: Associations
+    links:
+      - { label: Adhérer à l’AFS, external: membership }
+      - { label: Modèles de documents, page: resources }
+      - { label: Discord, external: discord }
+  - title: Gestionnaires de sites
+    links:
+      - { label: Conventions de site, page: resources }
+      - { label: Highline et faune sauvage, page: resources }
+      - { label: Contacter l’AFS, external: email }
+
+disciplines:
+  heading: Disciplines
+  featured:
+    - name: Slackline
+      text: Sangle tendue près du sol, dans un parc ou entre deux arbres.
+      photo: slackline-lac-bras-ouverts
+    - name: Highline
+      text: Slackline installée en hauteur, avec tout un système pour assurer la sécurité.
+      photo: highline-tour-rocheuse
+    - name: Trickline
+      text: Sangle de 5 cm de large, très tendue, pour y effectuer des rebonds et des figures.
+      photo: trickline-saut
+  others:
+    - name: Waterline
+      text: Slackline au-dessus de l’eau.
+      photo: waterline-lac
+    - name: Speedline
+      text: Traverser une sangle le plus vite possible, au sol ou en highline.
+      photo: speedline-festival
+    - name: Highline freestyle
+      text: Figures acrobatiques sur une highline.
+      photo: highline-freestyle-coucher-soleil
+
+gathering:
+  photo: festival-parc
+  statement:
+    before: L’essence de la slackline, c’est de
+    emphasis: se retrouver
+    after: dans un parc, sur la plage ou au bord d’une falaise.
+  link: { label: Comment débuter, page: community, anchor: debuter }
+
+associations:
+  heading: { one: association membre, other: associations membres }
+  mapLabel: Carte de France dont le contour est dessiné par une sangle, avec les associations membres numérotées à l’intérieur
+  contactLabel: Contacter
+
+agenda:
+  heading: Agenda
+  photo: highline-urbaine
+  source: "Source : calendrier de l’International Slackline Association, en France et dans le monde."
+  calendarLink: { label: Voir le calendrier complet, external: isaEvents }
+  noEvents: Aucun événement à venir dans le calendrier de l’ISA pour le moment.
+
+community:
+  heading: Communauté
+  photo: groupe-sangle
+  lede: Forum de discussion sur Discord. Actualités sur Instagram et Facebook. Vidéos sur YouTube.
+  discordLabel: Rejoindre le Discord
+  membership:
+    title: Adhérer à l’AFS
+    text: Réservé aux associations. Vote à l’Assemblée Générale.
+    link: { label: Adhérer avec HelloAsso, external: membership }
+  link: { label: Organisation de la communauté, page: community }
+
+about:
+  heading: L’association
+  lede: L’AFS promeut toutes les disciplines de ce sport. Elle soutient les initiatives locales, veille à la formation et à la sécurité des pratiquants, et agit pour la protection des sites naturels.
+  memberCountLabel: { one: association membre, other: associations membres }
+  isaLabel: Membre de l’International Slackline Association
+  photo: waterline-pont
+  link: { label: Missions et valeurs, page: association }

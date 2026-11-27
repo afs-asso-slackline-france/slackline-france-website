@@ -1,0 +1,61 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getCreditedPhoto } from "../../i18n/collections";
+import { resolveLink } from "../../i18n/links";
+import type { Locale } from "../../i18n/locales";
+import { SOCIAL_LINKS, SOCIAL_NETWORK_NAMES } from "../../lib/site";
+import Button from "../ui/Button.astro";
+import SectionHeading from "../ui/SectionHeading.astro";
+import Shot from "../ui/Shot.astro";
+import TextLink from "../ui/TextLink.astro";
+import Tile from "../ui/Tile.astro";
+
+interface Props {
+  community: CollectionEntry<"home">["data"]["community"];
+  locale: Locale;
+}
+
+const NEWS_NETWORKS = ["instagram", "facebook", "youtube"] as const;
+
+const { community, locale } = Astro.props;
+const photo = await getCreditedPhoto(community.photo.id, locale);
+const membership = community.membership;
+---
+
+<section class="mx-auto max-w-page px-gutter pb-section">
+  <div class="on-blue rounded-lg bg-blue p-7 text-paper sm:p-12 md:p-18">
+    <SectionHeading tone="onBlue" class="mb-6 md:mb-8">
+      {community.heading}
+    </SectionHeading>
+    <div class="grid items-center gap-10 md:grid-cols-2 md:gap-x-24">
+      <Shot photo={photo} locale={locale} preset="column" class="aspect-4/5" />
+      <div class="flex min-w-0 flex-col gap-6">
+        <p class="m-0 max-w-text text-lede">{community.lede}</p>
+        <div class="flex flex-wrap gap-3">
+          <Button href={SOCIAL_LINKS.discord}>{community.discordLabel}</Button>
+          {NEWS_NETWORKS.map((network) => (
+            <Button href={SOCIAL_LINKS[network]} variant="quietOnBlue">
+              {SOCIAL_NETWORK_NAMES[network]}
+            </Button>
+          ))}
+        </div>
+        <Tile tone="deep">
+          <h3 class="m-0 font-display text-item-title font-bold">
+            {membership.title}
+          </h3>
+          <p class="m-0">{membership.text}</p>
+          <div class="mt-auto pt-2">
+            <TextLink href={resolveLink(membership.link, locale)} tone="onBlue">
+              {membership.link.label}
+            </TextLink>
+          </div>
+        </Tile>
+        <div>
+          <TextLink href={resolveLink(community.link, locale)} tone="onBlue">
+            {community.link.label}
+          </TextLink>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

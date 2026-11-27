@@ -1,7 +1,7 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 
-type ButtonVariant = "main" | "quiet";
+type ButtonVariant = "main" | "quiet" | "quietOnBlue";
 
 interface Props extends HTMLAttributes<"a"> {
   href: string;
@@ -11,6 +11,7 @@ interface Props extends HTMLAttributes<"a"> {
 const VARIANT_CLASSES: Record<ButtonVariant, string> = {
   main: "border-raspberry bg-raspberry text-white hover:border-raspberry-deep hover:bg-raspberry-deep",
   quiet: "border-blue text-blue hover:bg-blue hover:text-white",
+  quietOnBlue: "border-paper text-paper hover:bg-paper hover:text-blue",
 };
 
 const { variant = "main", class: extraClasses, ...attributes } = Astro.props;

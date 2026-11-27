@@ -5,12 +5,19 @@ export interface PluralForms {
   other: string;
 }
 
-export function countWithNoun(
+export function pluralNoun(
   count: number,
   locale: Locale,
   forms: PluralForms,
 ): string {
   const category = new Intl.PluralRules(locale).select(count);
-  const noun = category === "one" ? forms.one : forms.other;
-  return `${count} ${noun}`;
+  return category === "one" ? forms.one : forms.other;
+}
+
+export function countWithNoun(
+  count: number,
+  locale: Locale,
+  forms: PluralForms,
+): string {
+  return `${count} ${pluralNoun(count, locale, forms)}`;
 }

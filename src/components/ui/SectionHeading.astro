@@ -1,0 +1,45 @@
+---
+import { Image } from "astro:assets";
+import logoLine from "../../assets/images/logo/afs-logo-line.png";
+import { HEADING_MARK_HEIGHT } from "../../lib/image-presets";
+
+type HeadingTone = "default" | "onBlue";
+
+interface Props {
+  id?: string;
+  tone?: HeadingTone;
+  class?: string;
+}
+
+const TONE_CLASSES: Record<HeadingTone, { text: string; mark: string }> = {
+  default: { text: "text-blue", mark: "" },
+  onBlue: { text: "text-paper", mark: "brightness-0 invert" },
+};
+
+const { id, tone = "default", class: extraClasses } = Astro.props;
+const toneClasses = TONE_CLASSES[tone];
+---
+
+<h2
+  id={id}
+  class:list={[
+    "m-0 flex scroll-mt-6 items-center gap-3 font-display text-section-title font-bold",
+    toneClasses.text,
+    extraClasses,
+  ]}
+>
+  <Image
+    src={logoLine}
+    alt=""
+    height={HEADING_MARK_HEIGHT}
+    class:list={["heading-mark flex-none object-contain", toneClasses.mark]}
+  />
+  <slot />
+</h2>
+
+<style>
+  .heading-mark {
+    width: var(--heading-mark-width);
+    height: var(--heading-mark-height);
+  }
+</style>
