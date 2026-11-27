@@ -1,0 +1,40 @@
+---
+import { Image } from "astro:assets";
+import type { CreditedPhoto } from "../../i18n/collections";
+import type { Locale } from "../../i18n/locales";
+import { IMAGE_PRESETS, type ImagePresetName } from "../../lib/image-presets";
+import Credit from "./Credit.astro";
+
+interface Props {
+  photo: CreditedPhoto;
+  locale: Locale;
+  preset: ImagePresetName;
+  class?: string;
+  isAboveTheFold?: boolean;
+}
+
+const {
+  photo,
+  locale,
+  preset,
+  class: frameClasses,
+  isAboveTheFold = false,
+} = Astro.props;
+const imagePreset = IMAGE_PRESETS[preset];
+---
+
+<figure
+  class:list={["relative m-0 overflow-hidden rounded-lg bg-band", frameClasses]}
+>
+  <Image
+    src={photo.image}
+    alt={photo.alt}
+    width={imagePreset.width}
+    widths={imagePreset.widths}
+    sizes={imagePreset.sizes}
+    loading={isAboveTheFold ? "eager" : "lazy"}
+    fetchpriority={isAboveTheFold ? "high" : "auto"}
+    class="absolute inset-0 block size-full object-cover"
+  />
+  <Credit photo={photo} locale={locale} />
+</figure>

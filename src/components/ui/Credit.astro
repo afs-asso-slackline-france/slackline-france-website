@@ -1,0 +1,30 @@
+---
+import type { CreditedPhoto } from "../../i18n/collections";
+import type { Locale } from "../../i18n/locales";
+import { PAGE_SLUGS, localizedAnchor } from "../../i18n/routes";
+import { uiStrings } from "../../i18n/ui";
+
+interface Props {
+  photo: CreditedPhoto;
+  locale: Locale;
+  class?: string;
+}
+
+const { photo, locale, class: placementClasses } = Astro.props;
+const prefix = uiStrings(locale).photoCredits.creditPrefix;
+const creditsHref = localizedAnchor(
+  PAGE_SLUGS.photoCredits,
+  locale,
+  photo.photographerId,
+);
+---
+
+<a
+  href={creditsHref}
+  class:list={[
+    "absolute py-0.5 text-credit font-semibold text-white no-underline text-shadow-credit hover:underline",
+    placementClasses ?? "bottom-2 left-2.5 right-2.5",
+  ]}
+>
+  {`${prefix} ${photo.photographerName}`}
+</a>

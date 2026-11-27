@@ -39,6 +39,14 @@
   --text-body--line-height: 1.55;
   --text-small: 0.9375rem;
   --text-small--line-height: 1.45;
+  --text-statement: clamp(1.875rem, 4.2vw, 3.75rem);
+  --text-statement--line-height: 1.08;
+  --text-statement--letter-spacing: -0.015em;
+  --text-fact: clamp(2.75rem, 5vw, 4.5rem);
+  --text-fact--line-height: 1;
+  --text-fact--letter-spacing: -0.02em;
+  --text-pin: 0.75rem;
+  --text-pin--line-height: 1;
   --text-credit: 0.6875rem;
   --text-credit--line-height: 1.5;
 
@@ -46,9 +54,15 @@
   --spacing-section: clamp(3.5rem, 7vw, 7rem);
   --spacing-section-tight: clamp(2rem, 4vw, 3.5rem);
   --spacing-strap: clamp(3.5rem, 8vw, 7.5rem);
+  --spacing-cut-photo: clamp(18.75rem, 40vw, 36.25rem);
+  --spacing-card-line: clamp(7.5rem, 15vw, 13.125rem);
+  --spacing-sag: clamp(0.75rem, 2vw, 1.75rem);
 
   --container-page: 82.5rem;
   --container-text: 60ch;
+  --container-statement: 22em;
+
+  --aspect-france-map: 700 / 660;
 
   --radius-*: initial;
   --radius-sm: 0.625rem;
@@ -79,6 +93,8 @@
   --walker-size: 22px;
   --walker-ring-size: 30px;
   --focus-ring-width: 3px;
+  --heading-mark-width: 1.15em;
+  --heading-mark-height: 1.3em;
 }
 
 @layer base {
@@ -102,5 +118,35 @@
 
   .on-blue :focus-visible {
     outline-color: var(--color-paper);
+  }
+}
+
+@layer components {
+  .strap-band,
+  .strap-seam,
+  .strap-outline,
+  .strap-outline-seam {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .strap-band {
+    stroke: var(--color-raspberry);
+    stroke-width: var(--strap-width);
+  }
+
+  .strap-outline {
+    stroke: var(--color-raspberry);
+    stroke-width: var(--strap-outline-width);
+  }
+
+  .strap-seam,
+  .strap-outline-seam {
+    stroke: var(--color-white);
+    stroke-opacity: var(--seam-opacity);
+    stroke-width: var(--seam-width);
+    stroke-dasharray: var(--seam-dash);
   }
 }

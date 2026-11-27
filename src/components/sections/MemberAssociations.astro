@@ -1,0 +1,117 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getAssociations } from "../../i18n/collections";
+import type { Locale } from "../../i18n/locales";
+import { HOME_ANCHORS } from "../../i18n/navigation";
+import { countWithNoun } from "../../i18n/plural";
+import {
+  MAP_HEIGHT,
+  MAP_WIDTH,
+  franceOutlinePath,
+  pinPositionRules,
+  placePins,
+} from "../../lib/france-map";
+import SectionHeading from "../ui/SectionHeading.astro";
+import TextLink from "../ui/TextLink.astro";
+
+interface Props {
+  content: CollectionEntry<"home">["data"]["associations"];
+  locale: Locale;
+}
+
+const { content, locale } = Astro.props;
+const associations = await getAssociations(locale);
+const pins = placePins(
+  associations.map((association) => ({
+    place: association.data.place,
+    coordinates: association.data.coordinates,
+  })),
+);
+const pinNumberByPlace = new Map(pins.map((pin) => [pin.place, pin.number]));
+const outlinePath = franceOutlinePath();
+const heading = countWithNoun(associations.length, locale, content.heading);
+---
+
+<section class="pb-section">
+  <div class="mx-auto mb-6 max-w-page px-gutter md:mb-10">
+    <SectionHeading id={HOME_ANCHORS.associations}>{heading}</SectionHeading>
+  </div>
+  <div
+    class="mx-auto grid max-w-page items-start gap-10 px-gutter md:grid-cols-2 md:gap-x-24"
+    data-association-map
+  >
+    <div
+      class="relative aspect-france-map max-w-full"
+      role="img"
+      aria-label={content.mapLabel}
+    >
+      <svg
+        class="absolute inset-0 size-full"
+        viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`}
+        aria-hidden="true"
+      >
+        <path class="fill-band" d={outlinePath}></path>
+        <path class="strap-outline" d={outlinePath}></path>
+        <path class="strap-outline-seam" d={outlinePath}></path>
+      </svg>
+      {pins.map((pin) => (
+        <span
+          class="absolute flex size-6 -translate-1/2 items-center justify-center rounded-pill bg-blue text-pin font-bold text-white transition-transform duration-150 motion-reduce:transition-none data-active:z-1 data-active:scale-150 data-active:bg-raspberry-deep"
+          data-pin={pin.place}
+          aria-hidden="true"
+        >
+          {pin.number}
+        </span>
+      ))}
+      <style is:inline set:html={pinPositionRules(pins)} />
+    </div>
+    <ul class="m-0 list-none border-t-2 border-blue p-0">
+      {associations.map((association) => (
+        <li
+          class="flex flex-wrap items-center justify-between gap-x-6 border-b border-rule py-2"
+          data-place={association.data.place}
+        >
+          <span class="flex min-w-0 items-center gap-3 font-semibold">
+            <span class="inline-flex size-6.5 flex-none items-center justify-center rounded-pill bg-blue text-pin font-bold text-white">
+              {pinNumberByPlace.get(association.data.place)}
+            </span>
+            {association.data.name}
+          </span>
+          <span class="flex basis-full items-center gap-3 pl-9.5 text-small text-mute sm:basis-auto sm:pl-0">
+            {association.data.city}
+            <TextLink
+              href={`mailto:${association.data.email}`}
+              class="text-body"
+            >
+              {content.contactLabel}
+            </TextLink>
+          </span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<script>
+  function setPlaceActive(map: HTMLElement, place: string, isActive: boolean) {
+    map.querySelectorAll(`[data-pin="${place}"]`).forEach((pin) => {
+      pin.toggleAttribute("data-active", isActive);
+    });
+  }
+
+  function linkRowsToPins(map: HTMLElement) {
+    map.querySelectorAll<HTMLElement>("[data-place]").forEach((row) => {
+      const place = row.dataset.place ?? "";
+      const activate = () => setPlaceActive(map, place, true);
+      const deactivate = () => setPlaceActive(map, place, false);
+      row.addEventListener("pointerenter", activate);
+      row.addEventListener("pointerleave", deactivate);
+      row.addEventListener("focusin", activate);
+      row.addEventListener("focusout", deactivate);
+    });
+  }
+
+  document
+    .querySelectorAll<HTMLElement>("[data-association-map]")
+    .forEach(linkRowsToPins);
+</script>

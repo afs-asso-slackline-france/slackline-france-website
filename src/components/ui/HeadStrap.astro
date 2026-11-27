@@ -1,15 +1,15 @@
 ---
 import {
+  STRAP_GEOMETRIES,
   STRAP_REST_POSITION,
-  STRAP_VIEWBOX_HEIGHT,
-  STRAP_VIEWBOX_WIDTH,
   lowestPoint,
   sagPath,
+  strapViewBox,
 } from "../../lib/strap";
 
 const restPath = sagPath(STRAP_REST_POSITION);
 const walker = lowestPoint(STRAP_REST_POSITION);
-const viewBox = `0 0 ${STRAP_VIEWBOX_WIDTH} ${STRAP_VIEWBOX_HEIGHT}`;
+const viewBox = strapViewBox(STRAP_GEOMETRIES.headLine);
 ---
 
 <div class="mt-1 h-strap sm:mt-3" aria-hidden="true" data-head-strap>
@@ -18,8 +18,8 @@ const viewBox = `0 0 ${STRAP_VIEWBOX_WIDTH} ${STRAP_VIEWBOX_HEIGHT}`;
     viewBox={viewBox}
     preserveAspectRatio="none"
   >
-    <path class="strap" d={restPath} data-strap-path></path>
-    <path class="seam" d={restPath} data-strap-path></path>
+    <path class="strap-band" d={restPath} data-strap-path></path>
+    <path class="strap-seam" d={restPath} data-strap-path></path>
     <g class="max-sm:hidden">
       <line
         class="walker-ring"
@@ -42,25 +42,11 @@ const viewBox = `0 0 ${STRAP_VIEWBOX_WIDTH} ${STRAP_VIEWBOX_HEIGHT}`;
 </div>
 
 <style>
-  .strap,
-  .seam,
   .walker,
   .walker-ring {
     fill: none;
     stroke-linecap: round;
     vector-effect: non-scaling-stroke;
-  }
-
-  .strap {
-    stroke: var(--color-raspberry);
-    stroke-width: var(--strap-width);
-  }
-
-  .seam {
-    stroke: var(--color-white);
-    stroke-opacity: var(--seam-opacity);
-    stroke-width: var(--seam-width);
-    stroke-dasharray: var(--seam-dash);
   }
 
   /* A zero-length line with round caps and a non-scaling stroke stays a perfect dot inside the stretched SVG. */

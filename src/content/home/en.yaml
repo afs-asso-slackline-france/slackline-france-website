@@ -1,0 +1,82 @@
+hero:
+  mainPhoto: highline-femme-brume
+  sidePhotos: [highline-freestyle-saut, initiation-enfant]
+
+audiences:
+  - title: Slackliners
+    links:
+      - { label: Find an association, page: home, anchor: associations }
+      - { label: Find a spot, page: spots }
+      - { label: Getting started, page: community, anchor: debuter }
+  - title: Associations
+    links:
+      - { label: Join the AFS, external: membership }
+      - { label: Document templates, page: resources }
+      - { label: Discord, external: discord }
+  - title: Site managers
+    links:
+      - { label: Site agreements, page: resources }
+      - { label: Highline and wildlife, page: resources }
+      - { label: Contact the AFS, external: email }
+
+disciplines:
+  heading: Disciplines
+  featured:
+    - name: Slackline
+      text: A line rigged close to the ground, in a park or between two trees.
+      photo: slackline-lac-bras-ouverts
+    - name: Highline
+      text: A slackline rigged high up, with a full system to keep you safe.
+      photo: highline-tour-rocheuse
+    - name: Trickline
+      text: A very tight line, 5 cm wide, for bounces and tricks.
+      photo: trickline-saut
+  others:
+    - name: Waterline
+      text: A slackline above the water.
+      photo: waterline-lac
+    - name: Speedline
+      text: Crossing a line as fast as possible, on the ground or as a highline.
+      photo: speedline-festival
+    - name: Highline freestyle
+      text: Acrobatic tricks on a highline.
+      photo: highline-freestyle-coucher-soleil
+
+gathering:
+  photo: festival-parc
+  statement:
+    before: Slackline is all about
+    emphasis: getting together
+    after: in a park, on a beach or at the edge of a cliff.
+  link: { label: How to get started, page: community, anchor: debuter }
+
+associations:
+  heading: { one: member association, other: member associations }
+  mapLabel: Map of France outlined by a slackline, with the member associations numbered inside
+  contactLabel: Contact
+
+agenda:
+  heading: Events
+  photo: highline-urbaine
+  source: "Source: calendar of the International Slackline Association, in France and worldwide."
+  calendarLink: { label: See the full calendar, external: isaEvents }
+  noEvents: No upcoming event in the ISA calendar for now.
+
+community:
+  heading: Community
+  photo: groupe-sangle
+  lede: Discussion forum on Discord. News on Instagram and Facebook. Videos on YouTube.
+  discordLabel: Join the Discord
+  membership:
+    title: Join the AFS
+    text: Open to associations. Members vote at the General Assembly.
+    link: { label: Join on HelloAsso, external: membership }
+  link: { label: How the community is organized, page: community }
+
+about:
+  heading: The association
+  lede: The AFS promotes every discipline of the sport. It supports local initiatives, looks after the training and safety of slackliners, and works to protect natural sites.
+  memberCountLabel: { one: member association, other: member associations }
+  isaLabel: Member of the International Slackline Association
+  photo: waterline-pont
+  link: { label: Mission and values, page: association }

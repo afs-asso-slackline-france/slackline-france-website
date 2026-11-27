@@ -1,7 +1,14 @@
 ---
 import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
-import PageHead from "../../components/sections/PageHead.astro";
-import { getPageEntry } from "../../i18n/collections";
+import AboutAssociation from "../../components/sections/AboutAssociation.astro";
+import Agenda from "../../components/sections/Agenda.astro";
+import AudienceCards from "../../components/sections/AudienceCards.astro";
+import CommunityPanel from "../../components/sections/CommunityPanel.astro";
+import Disciplines from "../../components/sections/Disciplines.astro";
+import Gathering from "../../components/sections/Gathering.astro";
+import HomeHero from "../../components/sections/HomeHero.astro";
+import MemberAssociations from "../../components/sections/MemberAssociations.astro";
+import { getHomeContent, getPageEntry } from "../../i18n/collections";
 import { PAGE_SLUGS, buildLocaleStaticPaths } from "../../i18n/routes";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
@@ -13,6 +20,7 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { locale } = Astro.props;
 const pageSlug = PAGE_SLUGS.home;
 const page = await getPageEntry(pageSlug, locale);
+const home = await getHomeContent(locale);
 ---
 
 <BaseLayout
@@ -21,9 +29,17 @@ const page = await getPageEntry(pageSlug, locale);
   locale={locale}
   pageSlug={pageSlug}
 >
-  <PageHead
+  <HomeHero
     heading={page.data.heading}
     lede={page.data.lede}
-    headingSize="hero"
+    hero={home.hero}
+    locale={locale}
   />
+  <AudienceCards audiences={home.audiences} locale={locale} />
+  <Disciplines disciplines={home.disciplines} locale={locale} />
+  <Gathering gathering={home.gathering} locale={locale} />
+  <MemberAssociations content={home.associations} locale={locale} />
+  <Agenda agenda={home.agenda} locale={locale} />
+  <CommunityPanel community={home.community} locale={locale} />
+  <AboutAssociation about={home.about} locale={locale} />
 </BaseLayout>

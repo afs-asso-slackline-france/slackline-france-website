@@ -1,0 +1,35 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getCreditedPhoto } from "../../i18n/collections";
+import { resolveLink } from "../../i18n/links";
+import type { Locale } from "../../i18n/locales";
+import CutPhoto from "../ui/CutPhoto.astro";
+import TextLink from "../ui/TextLink.astro";
+
+interface Props {
+  gathering: CollectionEntry<"home">["data"]["gathering"];
+  locale: Locale;
+}
+
+const SAG_LEFT_OF_CENTER = 0.42;
+
+const { gathering, locale } = Astro.props;
+const photo = await getCreditedPhoto(gathering.photo.id, locale);
+const { before, emphasis, after } = gathering.statement;
+---
+
+<section class="pt-section">
+  <CutPhoto photo={photo} locale={locale} sagPosition={SAG_LEFT_OF_CENTER} />
+  <div class="mx-auto max-w-page px-gutter pt-section-tight pb-section">
+    <p class="m-0 max-w-statement font-display text-statement font-bold text-balance text-blue">
+      {`${before} `}
+      <em class="text-raspberry not-italic">{emphasis}</em>
+      {` ${after}`}
+    </p>
+    <div class="mt-5">
+      <TextLink href={resolveLink(gathering.link, locale)}>
+        {gathering.link.label}
+      </TextLink>
+    </div>
+  </div>
+</section>

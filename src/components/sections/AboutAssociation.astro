@@ -1,0 +1,56 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getAssociations, getCreditedPhoto } from "../../i18n/collections";
+import { resolveLink } from "../../i18n/links";
+import type { Locale } from "../../i18n/locales";
+import { pluralNoun } from "../../i18n/plural";
+import SectionHeading from "../ui/SectionHeading.astro";
+import Shot from "../ui/Shot.astro";
+import TextLink from "../ui/TextLink.astro";
+
+interface Props {
+  about: CollectionEntry<"home">["data"]["about"];
+  locale: Locale;
+}
+
+const ISA_SHORT_NAME = "ISA";
+
+const { about, locale } = Astro.props;
+const photo = await getCreditedPhoto(about.photo.id, locale);
+const memberCount = (await getAssociations(locale)).length;
+const facts = [
+  {
+    value: `${memberCount}`,
+    label: pluralNoun(memberCount, locale, about.memberCountLabel),
+  },
+  { value: ISA_SHORT_NAME, label: about.isaLabel },
+];
+---
+
+<section class="pb-section">
+  <div class="mx-auto grid max-w-page items-center gap-10 px-gutter md:grid-cols-2 md:gap-x-24">
+    <div class="flex min-w-0 flex-col items-start gap-6">
+      <SectionHeading>{about.heading}</SectionHeading>
+      <p class="m-0 max-w-text text-lede">{about.lede}</p>
+      <dl class="m-0 grid w-full gap-x-8 gap-y-6 sm:grid-cols-2">
+        {facts.map((fact) => (
+          <div class="flex flex-col-reverse justify-end gap-1.5">
+            <dt class="text-small text-mute">{fact.label}</dt>
+            <dd class="m-0 font-display text-fact font-bold text-raspberry">
+              {fact.value}
+            </dd>
+          </div>
+        ))}
+      </dl>
+      <TextLink href={resolveLink(about.link, locale)}>
+        {about.link.label}
+      </TextLink>
+    </div>
+    <Shot
+      photo={photo}
+      locale={locale}
+      preset="column"
+      class="aspect-3/4 w-full max-w-115 justify-self-end"
+    />
+  </div>
+</section>

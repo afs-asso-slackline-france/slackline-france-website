@@ -1,0 +1,57 @@
+---
+import { Image } from "astro:assets";
+import type { CreditedPhoto } from "../../i18n/collections";
+import type { Locale } from "../../i18n/locales";
+import { IMAGE_PRESETS } from "../../lib/image-presets";
+import {
+  STRAP_GEOMETRIES,
+  areaBelowSagPath,
+  sagPath,
+  strapViewBox,
+} from "../../lib/strap";
+import Credit from "./Credit.astro";
+
+type FollowingGround = "paper" | "band";
+
+interface Props {
+  photo: CreditedPhoto;
+  locale: Locale;
+  sagPosition: number;
+  followingGround?: FollowingGround;
+}
+
+const GROUND_FILL_CLASSES: Record<FollowingGround, string> = {
+  paper: "fill-paper",
+  band: "fill-band",
+};
+
+const { photo, locale, sagPosition, followingGround = "paper" } = Astro.props;
+const geometry = STRAP_GEOMETRIES.cutPhoto;
+const strapPath = sagPath(sagPosition, geometry);
+const preset = IMAGE_PRESETS.fullWidth;
+---
+
+<figure class="relative m-0 bg-blue">
+  <Image
+    src={photo.image}
+    alt={photo.alt}
+    width={preset.width}
+    widths={preset.widths}
+    sizes={preset.sizes}
+    class="block h-cut-photo w-full object-cover"
+  />
+  <Credit photo={photo} locale={locale} class="top-4 left-gutter" />
+  <svg
+    class="absolute inset-x-0 -bottom-px h-strap w-full overflow-visible"
+    viewBox={strapViewBox(geometry)}
+    preserveAspectRatio="none"
+    aria-hidden="true"
+  >
+    <path
+      class={GROUND_FILL_CLASSES[followingGround]}
+      d={areaBelowSagPath(sagPosition, geometry)}
+    ></path>
+    <path class="strap-band" d={strapPath}></path>
+    <path class="strap-seam" d={strapPath}></path>
+  </svg>
+</figure>
