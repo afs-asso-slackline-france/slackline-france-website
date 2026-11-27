@@ -1,4 +1,11 @@
-import { SITE_NAME, SITE_ORIGIN, SITE_SHORT_NAME } from "./site";
+import {
+  CONTACT_EMAIL,
+  LEGAL_IDENTITY,
+  SITE_NAME,
+  SITE_ORIGIN,
+  SITE_SHORT_NAME,
+  SOCIAL_LINKS,
+} from "./site";
 
 const SCHEMA_CONTEXT = "https://schema.org";
 
@@ -19,5 +26,8 @@ export function buildOrganizationSchema() {
     alternateName: SITE_SHORT_NAME,
     url: SITE_ORIGIN,
     sport: "Slackline",
+    email: CONTACT_EMAIL,
+    address: { "@type": "PostalAddress", ...LEGAL_IDENTITY.address },
+    sameAs: Object.values(SOCIAL_LINKS),
   };
 }

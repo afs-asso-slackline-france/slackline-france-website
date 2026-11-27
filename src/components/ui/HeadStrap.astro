@@ -1,0 +1,125 @@
+---
+import {
+  STRAP_REST_POSITION,
+  STRAP_VIEWBOX_HEIGHT,
+  STRAP_VIEWBOX_WIDTH,
+  lowestPoint,
+  sagPath,
+} from "../../lib/strap";
+
+const restPath = sagPath(STRAP_REST_POSITION);
+const walker = lowestPoint(STRAP_REST_POSITION);
+const viewBox = `0 0 ${STRAP_VIEWBOX_WIDTH} ${STRAP_VIEWBOX_HEIGHT}`;
+---
+
+<div class="mt-1 h-strap sm:mt-3" aria-hidden="true" data-head-strap>
+  <svg
+    class="block h-full w-full overflow-visible"
+    viewBox={viewBox}
+    preserveAspectRatio="none"
+  >
+    <path class="strap" d={restPath} data-strap-path></path>
+    <path class="seam" d={restPath} data-strap-path></path>
+    <g class="max-sm:hidden">
+      <line
+        class="walker-ring"
+        x1={walker.x}
+        y1={walker.y}
+        x2={walker.x}
+        y2={walker.y}
+        data-walker
+      ></line>
+      <line
+        class="walker"
+        x1={walker.x}
+        y1={walker.y}
+        x2={walker.x}
+        y2={walker.y}
+        data-walker
+      ></line>
+    </g>
+  </svg>
+</div>
+
+<style>
+  .strap,
+  .seam,
+  .walker,
+  .walker-ring {
+    fill: none;
+    stroke-linecap: round;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .strap {
+    stroke: var(--color-raspberry);
+    stroke-width: var(--strap-width);
+  }
+
+  .seam {
+    stroke: var(--color-white);
+    stroke-opacity: var(--seam-opacity);
+    stroke-width: var(--seam-width);
+    stroke-dasharray: var(--seam-dash);
+  }
+
+  /* A zero-length line with round caps and a non-scaling stroke stays a perfect dot inside the stretched SVG. */
+  .walker-ring {
+    stroke: var(--color-paper);
+    stroke-width: var(--walker-ring-size);
+  }
+
+  .walker {
+    stroke: var(--color-blue);
+    stroke-width: var(--walker-size);
+  }
+</style>
+
+<script>
+  import {
+    STRAP_REST_POSITION,
+    lowestPoint,
+    positionFromPointer,
+    sagPath,
+  } from "../../lib/strap";
+
+  const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
+
+  function drawStrap(strap: HTMLElement, position: number) {
+    const path = sagPath(position);
+    const walkerX = `${lowestPoint(position).x}`;
+    strap.querySelectorAll("[data-strap-path]").forEach((element) => {
+      element.setAttribute("d", path);
+    });
+    strap.querySelectorAll("[data-walker]").forEach((element) => {
+      element.setAttribute("x1", walkerX);
+      element.setAttribute("x2", walkerX);
+    });
+  }
+
+  function followPointer(strap: HTMLElement) {
+    const area = strap.closest<HTMLElement>("[data-strap-area]") ?? strap;
+    let pendingFrame = 0;
+    area.addEventListener("pointermove", (event) => {
+      if (event.pointerType !== "mouse") return;
+      cancelAnimationFrame(pendingFrame);
+      pendingFrame = requestAnimationFrame(() => {
+        const box = area.getBoundingClientRect();
+        drawStrap(
+          strap,
+          positionFromPointer(event.clientX, box.left, box.width),
+        );
+      });
+    });
+    area.addEventListener("pointerleave", () => {
+      cancelAnimationFrame(pendingFrame);
+      drawStrap(strap, STRAP_REST_POSITION);
+    });
+  }
+
+  if (!matchMedia(REDUCED_MOTION_QUERY).matches) {
+    document
+      .querySelectorAll<HTMLElement>("[data-head-strap]")
+      .forEach(followPointer);
+  }
+</script>

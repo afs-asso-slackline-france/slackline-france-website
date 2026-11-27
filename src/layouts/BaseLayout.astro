@@ -1,6 +1,9 @@
 ---
+import { Font } from "astro:assets";
 import { SITE_INDEXABLE } from "astro:env/server";
 import "../styles/global.css";
+import SiteFooter from "../components/sections/SiteFooter.astro";
+import SiteHeader from "../components/sections/SiteHeader.astro";
 import { LOCALE_SETTINGS, type Locale } from "../i18n/locales";
 import { buildAlternateLinks, localizedPath } from "../i18n/routes";
 import { uiStrings } from "../i18n/ui";
@@ -53,21 +56,25 @@ const isIndexable = SITE_INDEXABLE && !isErrorPage;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
+    <Font cssVariable="--font-bricolage" preload />
+    <Font cssVariable="--font-instrument" preload />
     <script
       is:inline
       type="application/ld+json"
       set:html={JSON.stringify(structuredData)}
     />
   </head>
-  <body class="flex min-h-screen flex-col antialiased">
+  <body class="flex min-h-screen flex-col overflow-x-clip antialiased">
     <a
       href="#main-content"
-      class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:bg-paper focus:p-2"
     >
       {strings.accessibility.skipToContent}
     </a>
+    <SiteHeader locale={locale} pageSlug={pageSlug} />
     <main id="main-content" class="flex-1">
       <slot />
     </main>
+    <SiteFooter locale={locale} pageSlug={pageSlug} />
   </body>
 </html>

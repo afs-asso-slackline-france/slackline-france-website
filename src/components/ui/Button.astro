@@ -1,0 +1,28 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type ButtonVariant = "main" | "quiet";
+
+interface Props extends HTMLAttributes<"a"> {
+  href: string;
+  variant?: ButtonVariant;
+}
+
+const VARIANT_CLASSES: Record<ButtonVariant, string> = {
+  main: "border-raspberry bg-raspberry text-white hover:border-raspberry-deep hover:bg-raspberry-deep",
+  quiet: "border-blue text-blue hover:bg-blue hover:text-white",
+};
+
+const { variant = "main", class: extraClasses, ...attributes } = Astro.props;
+---
+
+<a
+  class:list={[
+    "inline-block rounded-pill border-2 px-7 py-4 leading-none font-bold no-underline",
+    VARIANT_CLASSES[variant],
+    extraClasses,
+  ]}
+  {...attributes}
+>
+  <slot />
+</a>

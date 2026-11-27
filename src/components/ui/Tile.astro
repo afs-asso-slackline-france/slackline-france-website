@@ -1,0 +1,32 @@
+---
+type TileTone = "band" | "paper" | "blue";
+type TileElement = "article" | "div" | "li";
+
+interface Props {
+  tone?: TileTone;
+  as?: TileElement;
+  class?: string;
+}
+
+const TONE_CLASSES: Record<TileTone, string> = {
+  band: "bg-band",
+  paper: "bg-paper",
+  blue: "on-blue bg-blue text-paper",
+};
+
+const {
+  tone = "band",
+  as: Element = "article",
+  class: extraClasses,
+} = Astro.props;
+---
+
+<Element
+  class:list={[
+    "flex min-w-0 flex-col gap-3 rounded-md p-6 sm:p-9",
+    TONE_CLASSES[tone],
+    extraClasses,
+  ]}
+>
+  <slot />
+</Element>

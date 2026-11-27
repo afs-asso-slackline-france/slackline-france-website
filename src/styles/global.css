@@ -1,1 +1,106 @@
 @import "tailwindcss";
+
+@theme {
+  --color-*: initial;
+  --color-blue: #123c49;
+  --color-blue-deep: #0c2c37;
+  --color-raspberry: #d92b57;
+  --color-raspberry-deep: #bd2049;
+  --color-paper: #f9f6f2;
+  --color-band: #ebe4dc;
+  --color-rule: #d9cfc4;
+  --color-mute: #675e57;
+  --color-ink: #1d2629;
+  --color-white: #ffffff;
+
+  --font-*: initial;
+  --font-display: var(--font-bricolage);
+  --font-body: var(--font-instrument);
+
+  --text-*: initial;
+  --text-hero: clamp(2.5rem, 5.2vw, 4.75rem);
+  --text-hero--line-height: 1;
+  --text-hero--letter-spacing: -0.02em;
+  --text-page-title: clamp(2.75rem, 6vw, 5.5rem);
+  --text-page-title--line-height: 1;
+  --text-page-title--letter-spacing: -0.02em;
+  --text-section-title: clamp(1.875rem, 3.8vw, 3.25rem);
+  --text-section-title--line-height: 1.05;
+  --text-section-title--letter-spacing: -0.015em;
+  --text-feature: clamp(1.625rem, 2.6vw, 2.25rem);
+  --text-feature--line-height: 1.1;
+  --text-feature--letter-spacing: -0.015em;
+  --text-item-title: 1.5rem;
+  --text-item-title--line-height: 1.2;
+  --text-item-title--letter-spacing: -0.01em;
+  --text-lede: clamp(1.125rem, 1.6vw, 1.375rem);
+  --text-lede--line-height: 1.4;
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.55;
+  --text-small: 0.9375rem;
+  --text-small--line-height: 1.45;
+  --text-credit: 0.6875rem;
+  --text-credit--line-height: 1.5;
+
+  --spacing-gutter: clamp(1rem, 4vw, 3.5rem);
+  --spacing-section: clamp(3.5rem, 7vw, 7rem);
+  --spacing-section-tight: clamp(2rem, 4vw, 3.5rem);
+  --spacing-strap: clamp(3.5rem, 8vw, 7.5rem);
+
+  --container-page: 82.5rem;
+  --container-text: 60ch;
+
+  --radius-*: initial;
+  --radius-sm: 0.625rem;
+  --radius-md: 1.125rem;
+  --radius-lg: 1.75rem;
+  --radius-pill: 999px;
+
+  --breakpoint-*: initial;
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 60rem;
+  --breakpoint-lg: 70rem;
+
+  --text-shadow-credit: 0 0 3px rgb(0 0 0 / 0.55), 0 1px 2px rgb(0 0 0 / 0.45);
+}
+
+:root {
+  --strap-width: 12px;
+  --strap-outline-width: 10px;
+  --seam-width: 1.5px;
+  --seam-opacity: 0.6;
+  --seam-dash: 7px;
+  --arc-height: 0.625rem;
+  --arc-thickness: 3px;
+  --arc-offset: 5px;
+  --arc-hidden-scale: 0.2;
+  --motion-fast: 150ms;
+  --motion-base: 200ms;
+  --walker-size: 22px;
+  --walker-ring-size: 30px;
+  --focus-ring-width: 3px;
+}
+
+@layer base {
+  html {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-size: 100%;
+  }
+
+  body {
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+  }
+
+  :focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-blue);
+    outline-offset: var(--focus-ring-width);
+    border-radius: var(--radius-sm);
+  }
+
+  .on-blue :focus-visible {
+    outline-color: var(--color-paper);
+  }
+}

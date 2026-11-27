@@ -2,12 +2,16 @@ import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { beforeAll, describe, expect, it } from "vitest";
 import { LOCALES } from "../src/i18n/locales";
-import { HOME_PAGE_SLUG, localizedPath } from "../src/i18n/routes";
+import { PAGE_SLUGS, localizedPath } from "../src/i18n/routes";
 import { absoluteUrl } from "../src/lib/seo";
 
 const DIST_DIRECTORY = join(import.meta.dirname, "..", "dist");
 
-const PUBLISHED_PAGE_SLUGS = [HOME_PAGE_SLUG];
+const PUBLISHED_PAGE_SLUGS = [
+  PAGE_SLUGS.home,
+  PAGE_SLUGS.photoCredits,
+  PAGE_SLUGS.legalNotice,
+];
 
 const PUBLISHED_PATHS = PUBLISHED_PAGE_SLUGS.flatMap((pageSlug) =>
   LOCALES.map((locale) => localizedPath(pageSlug, locale)),

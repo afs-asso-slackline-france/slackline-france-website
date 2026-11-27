@@ -138,33 +138,42 @@ Content never contains layout; components never hardcode copy.
 
 - `assets/` at the repository root is the raw photo library (full size originals, git ignored).
   Never import from it. To use a photo, copy a resized version (2400px on the long side at most)
-  into `src/assets/images/<page>/` under a descriptive kebab-case name.
+  into `src/assets/images/photos/` under a descriptive kebab-case name, then register it in
+  `src/content/photos.yaml` with its photographer, title and alt text in both locales. Pages use
+  photos by their id; the Crédits photo page is built from that registry.
 - Never reference images in `src/assets/` as raw string paths. Import them and render with
   `<Image>` or `<Picture>` from `astro:assets`, with explicit `widths`/`sizes` for responsive
   images.
 - Credit the photographer of every photo shown (the library folders and file names carry the
-  name). Keep credits in the content entry next to the image, not in components.
+  name). Photographers live in `src/content/photographers.yaml`; never write a credit in a
+  component. Never publish a credit whose author is not confirmed by the user.
 - `public/` is only for files that must keep a fixed URL. Do not put content images there.
 
 ## Design system: AFS
 
-The site follows the AFS design system (Claude Design artifact
-https://claude.ai/artifact/DQw24SQfFDsB8yAdN4NVuG; start with its `project/README.md`).
+The site implements the AFS design system (Claude Design artifact
+https://claude.ai/artifact/DQw24SQfFDsB8yAdN4NVuG, its `project/README.md` and component READMEs)
+and the page designs of the canvas https://claude.ai/artifact/AZ687Gyz74rcWfZnx8VDPN, page
+"V2 · Autour des photos". Its tokens live in `src/styles/global.css`; when the artifact changes,
+update the tokens there, never in components. When the artifact and a request disagree, ask.
 
-It is still being reworked with the user. Do not implement its tokens, fonts or components until
-the user says so, and do not copy values from the artifact into code on your own initiative.
-Once implemented, this section will hold the binding summary; until then, when the artifact and a
-request disagree, ask.
-
-Current direction, for orientation only:
+Binding summary:
 
 - Voice: state facts, no slogans or sales language, address the reader as « vous ». The
   association's Notion wiki is the source for institutional text.
-- Color: mostly light grounds, a mountain blue for titles and dark tiles, one raspberry accent in
-  small frequent touches, never as a large surface.
-- Shape: square corners, no shadows, no gradients, no pills.
-- Photos: real practice in real places, landscape visible, no stock images.
-- The strap: the slackline drawn as a strap of webbing, used sparingly as the signature graphic.
+- Color: `paper` and `band` grounds, `blue` for titles and at most one dark panel per page,
+  `raspberry` in small frequent touches (main buttons, the strap, markers), never as a large
+  surface. Small raspberry text uses `raspberry-deep`.
+- Shape: soft corners (`rounded-sm`, `rounded-md`, `rounded-lg`), pills for buttons, fields and
+  credit labels. No shadows, no gradients.
+- Type: Bricolage Grotesque bold for display (`font-display`), Instrument Sans for text, self
+  hosted through the Astro Fonts API.
+- Photos: real practice in real places, landscape visible, no stock images. Text sits beside or
+  below a photo, never on top. Every photo shows its credit.
+- The strap: the raspberry webbing that sags. Once under every page head (`HeadStrap`, following
+  the pointer), at most once per page along a cut photo or between two sections.
+- No block of plain text longer than three lines: use the containers of the design system (Tile,
+  Spec, Points, Levels, Facts, Statement, LinkTile, Rows).
 
 ## Tokens and responsive
 
